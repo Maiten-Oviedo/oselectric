@@ -1,45 +1,130 @@
-import { ServiceCard } from '../Components/ServiceCard'
-import type { IService } from '../types/IService'
+"use client"
+
+import { ServiceCard } from "../Components/ServiceCard"
+import type { IService } from "../types/IService"
+
 
 const Services = () => {
   const principalServices: IService[] = [
     {
-      title: 'Instalaciones eléctricas',
-      description: 'Realizamos instalaciones eléctricas seguras y eficientes.',
-      image: './assets/images/services/service.webp',
-      alt: '',
+      id: "sistemas-fotovoltaicos",
+      title: "Sistemas Fotovoltaicos",
+      description:
+        "Instalación y venta de sistemas completos para generación de energía solar. Soluciones sustentables y eficientes para hogares y empresas.",
+      image: "./assets/images/services/service.webp",
+      alt: "Instalación de paneles solares fotovoltaicos en techo residencial con técnicos especializados",
+      features: [
+        "Paneles de alta eficiencia",
+        "Inversores inteligentes",
+        "Monitoreo en tiempo real",
+        "Garantía extendida",
+      ],
+      category: "fotovoltaica",
     },
     {
-      title: 'Mantenimiento eléctrico',
+      id: "electricidad-industrial",
+      title: "Electricidad Industrial",
       description:
-        'Ofrecemos servicios de mantenimiento para asegurar el buen funcionamiento de tus sistemas eléctricos.',
-      image: './assets/images/services/service.webp',
-      alt: '',
+        "Especialistas en instalaciones eléctricas industriales y grandes áreas. Proyectos de alta complejidad con estándares internacionales.",
+      image: "./assets/images/services/service.webp",
+      alt: "Instalación eléctrica industrial en planta de manufactura con equipos de alta tensión",
+      features: ["Alta tensión", "Automatización", "Tableros de control", "Certificaciones"],
+      category: "industrial",
     },
     {
-      title: 'Renovaciones eléctricas',
+      id: "obras-mantenimiento",
+      title: "Obras y Mantenimiento",
       description:
-        'Actualizamos tus instalaciones eléctricas a los estándares más altos.',
-      image: './assets/images/services/service.webp',
-      alt: '',
+        "Servicios integrales de construcción eléctrica y mantenimiento preventivo. Garantizamos el funcionamiento óptimo de sus instalaciones.",
+      image: "./assets/images/services/service.webp",
+      alt: "Técnico realizando mantenimiento preventivo en tablero eléctrico industrial",
+      features: ["Mantenimiento preventivo", "Reparaciones urgentes", "Actualizaciones", "Soporte 24/7"],
+      category: "mantenimiento",
     },
   ]
 
   return (
-    <section
-      id="servicios"
-      className="px-6 md:px-32 mt-20 pt-24 pb-16 bg-gray-100"
-      aria-label="Sección de Servicios"
-    >
-      <h2 className="text-5xl mb-12 font-semibold text-center">
-        Nuestros Servicios
-      </h2>
-      <ul className="w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center items-center">
-        {principalServices.map((service, index) => (
-          <ServiceCard key={`service-${index}`} service={service} />
-        ))}
-      </ul>
-    </section>
+    <>
+      <section
+        id="servicios"
+        className="px-4 sm:px-6 md:px-16 lg:px-32 mt-20 pt-24 pb-20 bg-gradient-to-b from-gray-50 to-white"
+        aria-labelledby="services-heading"
+      >
+        {/* Header de la sección */}
+        <header className="text-center mb-16">
+          <h2 id="services-heading" className="text-4xl sm:text-5xl lg:text-6xl mb-6 font-semibold text-gray-900">
+            Nuestros <span className="text-primary">Servicios</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Ofrecemos soluciones eléctricas integrales con más de 10 años de experiencia en el sector. Desde energía
+            renovable hasta instalaciones industriales complejas.
+          </p>
+        </header>
+
+        {/* Grid de servicios */}
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
+          {principalServices.map((service, index) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              priority={index < 2} // Priorizar las primeras 2 imágenes
+            />
+          ))}
+        </ul>
+
+        {/* Call to action */}
+        <div className="text-center mt-16">
+          <p className="text-lg text-gray-600 mb-6">¿Necesitas una solución personalizada?</p>
+          <a
+            href="#contacto"
+            className="
+              inline-flex items-center justify-center
+              bg-primary hover:bg-primary/90 active:bg-primary/80
+              text-white font-medium text-lg
+              px-8 py-4 rounded-lg
+              shadow-lg hover:shadow-xl
+              transition-all duration-300 ease-out
+              transform hover:scale-105 active:scale-95
+              focus:outline-none focus:ring-4 focus:ring-primary/30
+            "
+          >
+            Solicitar Cotización
+            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      {/* Schema.org structured data para SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            provider: {
+              "@type": "LocalBusiness",
+              name: "Instalaciones Eléctricas Profesionales",
+            },
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Servicios Eléctricos",
+              itemListElement: principalServices.map((service, index) => ({
+                "@type": "Offer",
+                position: index + 1,
+                itemOffered: {
+                  "@type": "Service",
+                  name: service.title,
+                  description: service.description,
+                  category: service.category,
+                },
+              })),
+            },
+          }),
+        }}
+      />
+    </>
   )
 }
 

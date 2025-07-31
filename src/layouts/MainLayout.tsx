@@ -1,4 +1,5 @@
 import Header from '../Components/Header'
+import AboutUs from '../sections/AboutUs'
 import Contact from '../sections/Contact'
 import Footer from '../sections/Footer'
 import Hero from '../sections/Hero'
@@ -14,6 +15,7 @@ const MainLayout = () => {
       <Services />
       <WhyChooseUs />
       <LatestsWorks />
+      <AboutUs/>
       <Contact />
       <Footer />
     </main>
