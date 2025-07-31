@@ -6,7 +6,7 @@ interface Props {
 
 export const ServiceCard = ({ service }: Props) => {
   return (
-    <article className="group overflow-hidden cursor-pointer relative h-[70vh] flex flex-col items-center justify-center p-4 shadow-lg">
+    <li className="group overflow-hidden cursor-pointer relative h-[70vh] flex flex-col items-center justify-center p-4 shadow-lg">
       <div className="bg-black/30 absolute top-0 left-0 w-full h-full z-10" />
       <img
         src={`${service.image}`}
@@ -17,6 +17,6 @@ export const ServiceCard = ({ service }: Props) => {
       <h4 className="text-2xl z-30 text-center text-white font-semibold">
         {service.title}
       </h4>
-    </article>
+    </li>
   )
 }

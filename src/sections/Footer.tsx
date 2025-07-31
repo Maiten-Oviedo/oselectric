@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="my-16  px-4 md:px-24">
       <article className="border-t-5 border-primary pt-16 flex justify-between">
         <i className="flex flex-col items-center">
-          <img className="rounded-2xl size-20" src="/assets/images/logo.jpeg" />
+          <img className="rounded-2xl size-20" src="/assets/images/logo.jpeg" alt='Logo de la empresa, un diseño limpio con tonos azules y rojos que expresan las iniciales OSE.'/>
           <p className="text-xl">Servicios Eléctricos</p>
         </i>
         <div className="flex gap-10">

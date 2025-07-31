@@ -3,7 +3,7 @@
 /* Sora Regular */
 @font-face {
   font-family: 'Sora';
-  src: url('/assets/fonts/sora/Sora-Regular.ttf') format('truetype');
+  src: url('/assets/fonts/sora/Sora-Regular.woff2') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
@@ -11,7 +11,7 @@
 /* Sora SemiBold */
 @font-face {
   font-family: 'Sora';
-  src: url('/assets/fonts/sora/Sora-SemiBold.ttf') format('truetype');
+  src: url('/assets/fonts/sora/Sora-SemiBold.woff2') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
@@ -19,7 +19,7 @@
 /* Sora ExtraBold */
 @font-face {
   font-family: 'Sora';
-  src: url('/assets/fonts/sora/Sora-ExtraBold.ttf') format('truetype');
+  src: url('/assets/fonts/sora/Sora-ExtraBold.woff2') format('truetype');
   font-weight: 800;
   font-style: normal;
 }

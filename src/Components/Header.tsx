@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className="w-full fixed top-0 left-0 z-50 bg-[#fff] px-4 md:px-24">
       <article className="mx-auto sm:px-6 lg:px-8  flex items-center justify-between">
-        <img className="rounded-2xl size-20" src="/assets/images/logo.jpeg" />
+        <img className="rounded-2xl size-20" src="/assets/images/logo.jpeg" alt='Logo de la empresa, un diseño limpio con tonos azules y rojos que expresan las iniciales OSE.'/>
 
         {/* DESKTOP MENU */}
         <nav className="hidden md:flex gap-8">
