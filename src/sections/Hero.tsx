@@ -15,7 +15,7 @@ const Hero = () => {
           <p className="text-black">
             Somos una empresa que brinda el mejor servicio
           </p>
-          <a className="bg-primary text-white px-4 py-3 w-max font-medium shadow-md hover:bg-gray-300 transition cursor-pointer">
+          <a href='#contacto' className="bg-primary text-white px-4 py-3 w-max font-medium shadow-md hover:bg-gray-300 transition cursor-pointer" title="Contactános">
             Contáctanos
           </a>
         </div>

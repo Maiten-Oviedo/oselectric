@@ -2,55 +2,117 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="theme-color" content="#ff4500" />
+    <title>OSElectric - Instalaciones eléctricas y paneles solares | Energía renovable</title>
+
+    <meta name="description" content="OSElectric: soluciones en instalaciones eléctricas y paneles solares para hogares y empresas. Energía renovable, confianza y eficiencia energética." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#00ADEE" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="OSElectric" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://oselectric.vercel.app/" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.jpeg" />
+
+    <!-- Open Graph / Social -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="OSElectric" />
+    <meta property="og:title" content="OSElectric - Instalaciones eléctricas y paneles solares" />
+    <meta property="og:description" content="Instalaciones eléctricas y soluciones con paneles solares. Aumentá tu eficiencia energética con OSElectric." />
+    <meta property="og:image" content="https://oselectric.vercel.app/assets/images/logo.jpeg" />
+    <meta property="og:url" content="https://oselectric.vercel.app/" />
     <meta property="og:locale" content="es_ES" />
 
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="google" content="nositelinkssearchbox, notranslate, max-snippet:-1" />
-
-    <link rel="canonical" href="https://maiten-dev.vercel.app/" />
-
-    <meta name="author" content="Maitén Oviedo" />
-    <meta name="publisher" content="Maitén Oviedo" />
-
-    <meta name="description" content="Contratame para solucionar tu problema. Desarrollador Web y Programador. Capaz de crear Webs Únicas." />
-    
-    <meta name="keywords" content="Desarrollador FullStack, Desarrollador, FullStack, Desarrollador Full Stack, Desarrollador FrontEnd, Desarrollador Front End, Front End, FrontEnd, Programador Java, Programador Backend, Backend, Desarrollador Backend, Portfolio, Programador, Portfolio Web" />
-    
-    <meta property="og:title" content="Portfolio de Maitén Oviedo - Desarrollador FullStack" />
-    <meta property="og:description" content="Explora mis portafolio como desarrollador web. Contratame para llevar tu empresa al mundo IT." />
-    <meta property="og:image" content="https://maiten-dev.vercel.app/assets/images/me-2.webp" />
-    <meta property="og:url" content="https://maiten-dev.vercel.app/" />
-    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Portfolio de Maitén - Desarrollador Web FullStack y Programador" />
-    <meta name="twitter:description" content="Contratame para solucionar tu problema. Desarrollador Web y Programador. Capáz de crear Webs Únicas." />
-    <meta name="twitter:image" content="https://maiten-dev.vercel.app/assets/images/me-2.webp" />
-    
-    <title>Portfolio de Maitén - Desarrollador Web FullStack y Programador</title>
+    <meta name="twitter:title" content="OSElectric - Instalaciones eléctricas y paneles solares" />
+    <meta name="twitter:description" content="Soluciones eléctricas y energía solar para tu hogar o negocio. Calidad, eficiencia y confianza con OSElectric." />
+    <meta name="twitter:image" content="https://oselectric.vercel.app/assets/images/logo.jpeg" />
+
+    <!-- Preload fonts -->
+    <link rel="preload" href="/assets/fonts/sora/Sora-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/assets/fonts/sora/Sora-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <!-- Optional: preconnect si usás analytics, CDN, etc. -->
+    <!-- <link rel="preconnect" href="https://www.google-analytics.com" /> -->
+
+    <!-- JSON-LD: negocio local / electricista -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Maitén Oviedo",
-        "jobTitle": "Desarrollador Web FullStack",
-        "url": "https://maiten-dev.vercel.app/",
-        "image": "https://maiten-dev.vercel.app/assets/images/me-2.webp",
-        "sameAs": [
-          "https://www.linkedin.com/in/maitenoviedo",
-          "https://github.com/maitenoviedo"
-        ]
-      }
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "url": "https://oselectric.vercel.app/",
+          "name": "OSElectric",
+          "publisher": {
+            "@type": "Organization",
+            "name": "OSElectric",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://oselectric.vercel.app/assets/images/logo.jpeg"
+            }
+          }
+        },
+        {
+          "@type": "Electrician",
+          "name": "OSElectric",
+          "url": "https://oselectric.vercel.app/",
+          "logo": "https://oselectric.vercel.app/assets/images/logo.jpeg",
+          "description": "Instalaciones eléctricas y soluciones con paneles solares para hogares y empresas.",
+          "image": "https://oselectric.vercel.app/assets/images/logo.jpeg",
+          "areaServed": {
+            "@type": "Country",
+            "name": "Argentina"
+          },
+          "serviceType": [
+            "Instalaciones eléctricas",
+            "Paneles solares",
+            "Renovación eléctrica",
+            "Eficiencia energética"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios eléctricos y solares",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Instalaciones eléctricas"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Paneles solares"
+                }
+              }
+            ]
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ciudad",
+            "addressRegion": "Provincia",
+            "addressCountry": "AR"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+54-9-XXXXXXXXXX",
+            "contactType": "customer service",
+            "areaServed": "AR",
+            "availableLanguage": ["es"]
+          }
+        }
+      ]
+    }
     </script>
-   
-    <link rel="preload" href="/assets/fonts/sora/Sora-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="/assets/fonts/sora/Sora-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="/assets/fonts/sora/Sora-ExtraBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
