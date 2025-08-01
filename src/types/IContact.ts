@@ -6,9 +6,3 @@ export interface IContactForm {
   message: string
   urgency: "baja" | "media" | "alta"
 }
-
-export interface IContactResponse {
-  success: boolean
-  message: string
-  id?: string
-}

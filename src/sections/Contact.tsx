@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useRef, useEffect } from "react"
-import type { IContactForm, IContactResponse } from "../types/IContact"
+import emailjs from "@emailjs/browser"
+import type { IContactForm } from "../types/IContact"
 
 const Contact = () => {
   const [formData, setFormData] = useState<IContactForm>({
@@ -71,18 +71,80 @@ const Contact = () => {
     setIsSubmitting(true)
     setSubmitStatus({ type: null, message: "" })
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+    // Validación básica
+    if (!formData.name || !formData.email || !formData.service || !formData.message) {
+      setSubmitStatus({
+        type: "error",
+        message: "Por favor completa todos los campos obligatorios.",
       })
+      setIsSubmitting(false)
+      return
+    }
 
-      const result: IContactResponse = await response.json()
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      setSubmitStatus({
+        type: "error",
+        message: "Por favor ingresa un email válido.",
+      })
+      setIsSubmitting(false)
+      return
+    }
 
-      if (result.success) {
+    try {
+      // Preparar datos para EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone || "No proporcionado",
+        service: formData.service,
+        urgency: formData.urgency.toUpperCase(),
+        message: formData.message,
+        to_name: "Instalaciones Eléctricas", // Tu nombre/empresa
+        reply_to: formData.email,
+        // Información adicional para el template
+        urgency_color: formData.urgency === "alta" ? "#dc2626" : formData.urgency === "media" ? "#d97706" : "#16a34a",
+        estimated_response:
+          formData.urgency === "alta" ? "2-4 horas" : formData.urgency === "media" ? "24 horas" : "48 horas",
+      }
+
+      // Enviar email principal
+      const result = await emailjs.send(
+        process.env.VITE_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.VITE_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        templateParams,
+        process.env.VITE_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      )
+
+      if (result.status === 200) {
+        // Enviar email de confirmación al cliente
+        const confirmationParams = {
+          to_name: formData.name,
+          to_email: formData.email,
+          service: formData.service,
+          urgency: formData.urgency,
+          message: formData.message,
+          estimated_response:
+            formData.urgency === "alta" ? "2-4 horas" : formData.urgency === "media" ? "24 horas" : "48 horas",
+          company_name: "Instalaciones Eléctricas Profesionales",
+          company_phone: "+54 11 1234-5678",
+          company_email: "info@tuempresa.com",
+        }
+
+        // Enviar confirmación (opcional - necesitas crear un segundo template)
+        try {
+          await emailjs.send(
+            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+            process.env.NEXT_PUBLIC_EMAILJS_CONFIRMATION_TEMPLATE_ID!, // Template de confirmación
+            confirmationParams,
+            process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+          )
+        } catch (confirmationError) {
+          console.log("Error enviando confirmación:", confirmationError)
+          // No mostramos error al usuario, el email principal se envió correctamente
+        }
+
         setSubmitStatus({
           type: "success",
           message: "¡Mensaje enviado correctamente! Te responderemos pronto.",
@@ -102,16 +164,12 @@ const Contact = () => {
         if (formRef.current) {
           formRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
         }
-      } else {
-        setSubmitStatus({
-          type: "error",
-          message: result.message || "Error al enviar el mensaje. Inténtalo de nuevo.",
-        })
       }
-    } catch (error : unknown) {
+    } catch (error) {
+      console.error("Error enviando email:", error)
       setSubmitStatus({
         type: "error",
-        message: "Error de conexión. Verifica tu internet e inténtalo de nuevo.",
+        message: "Error al enviar el mensaje. Por favor inténtalo de nuevo o contáctanos directamente.",
       })
     } finally {
       setIsSubmitting(false)
@@ -123,7 +181,7 @@ const Contact = () => {
       <section
         ref={sectionRef}
         id="contacto"
-        className="px-4 sm:px-6 md:px-16 lg:px-32  bg-gradient-to-b from-white to-gray-50"
+        className="px-4 sm:px-6 md:px-16 lg:px-32 py-20 bg-gradient-to-b from-white to-gray-50"
         aria-labelledby="contact-heading"
       >
         {/* Header de la sección */}
@@ -184,7 +242,9 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Teléfono</p>
-                      <p className="text-gray-600">+54 11 1234-5678</p>
+                      <a href="tel:+5411123456789" className="text-gray-600 hover:text-primary transition-colors">
+                        +54 11 1234-5678
+                      </a>
                     </div>
                   </div>
 
@@ -201,7 +261,12 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Email</p>
-                      <p className="text-gray-600">info@tuempresa.com</p>
+                      <a
+                        href="mailto:info@tuempresa.com"
+                        className="text-gray-600 hover:text-primary transition-colors"
+                      >
+                        info@tuempresa.com
+                      </a>
                     </div>
                   </div>
 
@@ -248,6 +313,28 @@ const Contact = () => {
                 </div>
               </div>
 
+              {/* WhatsApp */}
+              <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+                <h4 className="text-lg font-bold text-green-800 mb-3 flex items-center">
+                  <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+                  </svg>
+                  WhatsApp Directo
+                </h4>
+                <p className="text-green-700 text-sm mb-3">¿Necesitas respuesta inmediata? Escríbenos por WhatsApp</p>
+                <a
+                  href="https://wa.me/5492613897545?text=Hola,%20me%20interesa%20información%20sobre%20sus%20servicios%20eléctricos"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
+                  </svg>
+                  Chatear Ahora
+                </a>
+              </div>
+
               {/* Servicios de emergencia */}
               <div className="bg-red-50 border border-red-200 rounded-xl p-6">
                 <h4 className="text-lg font-bold text-red-800 mb-2 flex items-center">
@@ -261,7 +348,10 @@ const Contact = () => {
                   Emergencias 24/7
                 </h4>
                 <p className="text-red-700 text-sm">
-                  Para emergencias eléctricas fuera del horario comercial, llama al: <strong>+54 11 9999-0000</strong>
+                  Para emergencias eléctricas fuera del horario comercial, llama al:{" "}
+                  <a href="tel:+5411999900000" className="font-bold hover:underline">
+                    +54 11 9999-0000
+                  </a>
                 </p>
               </div>
             </div>
