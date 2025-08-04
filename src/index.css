@@ -33,10 +33,12 @@
 
 html{
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body{
   color: var(--color-black);
+  overflow-x: hidden;
   font-family: 'Sora', sans-serif;
   background-color: #fff;
 }

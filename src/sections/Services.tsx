@@ -1,45 +1,54 @@
-"use client"
+'use client'
 
-import { ServiceCard } from "../Components/ServiceCard"
-import type { IService } from "../types/IService"
-
+import { ServiceCard } from '../Components/ServiceCard'
+import type { IService } from '../types/IService'
 
 const Services = () => {
   const principalServices: IService[] = [
     {
-      id: "sistemas-fotovoltaicos",
-      title: "Sistemas Fotovoltaicos",
+      id: 'sistemas-fotovoltaicos',
+      title: 'Sistemas Fotovoltáicos',
       description:
-        "Instalación y venta de sistemas completos para generación de energía solar. Soluciones sustentables y eficientes para hogares y empresas.",
-      image: "./assets/images/services/service.webp",
-      alt: "Instalación de paneles solares fotovoltaicos en techo residencial con técnicos especializados",
+        'Instalación y venta de sistemas completos para generación de energía solar. Soluciones sustentables y eficientes para Agro, Empresas y Hogares.',
+      image: './assets/images/services/service.webp',
+      alt: 'Instalación de paneles solares fotovoltáicos en techo residencial con técnicos especializados',
       features: [
-        "Paneles de alta eficiencia",
-        "Inversores inteligentes",
-        "Monitoreo en tiempo real",
-        "Garantía extendida",
+        'Paneles de alta eficiencia',
+        'Inversores inteligentes',
+        'Monitoreo en tiempo real',
+        'Garantía extendida',
       ],
-      category: "fotovoltaica",
+      category: 'fotovoltaica',
     },
     {
-      id: "electricidad-industrial",
-      title: "Electricidad Industrial",
+      id: 'electricidad-industrial',
+      title: 'Electricidad Industrial',
       description:
-        "Especialistas en instalaciones eléctricas industriales y grandes áreas. Proyectos de alta complejidad con estándares internacionales.",
-      image: "./assets/images/services/service.webp",
-      alt: "Instalación eléctrica industrial en planta de manufactura con equipos de alta tensión",
-      features: ["Alta tensión", "Automatización", "Tableros de control", "Certificaciones"],
-      category: "industrial",
+        'Especialistas en instalaciones eléctricas industriales y grandes áreas. Proyectos de alta complejidad con estándares internacionales.',
+      image: './assets/images/services/service.webp',
+      alt: 'Instalación eléctrica industrial en planta de manufactura con equipos de alta tensión',
+      features: [
+        'Alta tensión',
+        'Automatización',
+        'Tableros de control',
+        'Certificaciones',
+      ],
+      category: 'industrial',
     },
     {
-      id: "obras-mantenimiento",
-      title: "Obras y Mantenimiento",
+      id: 'obras-mantenimiento',
+      title: 'Obras y Mantenimiento',
       description:
-        "Servicios integrales de construcción eléctrica y mantenimiento preventivo. Garantizamos el funcionamiento óptimo de sus instalaciones.",
-      image: "./assets/images/services/service.webp",
-      alt: "Técnico realizando mantenimiento preventivo en tablero eléctrico industrial",
-      features: ["Mantenimiento preventivo", "Reparaciones urgentes", "Actualizaciones", "Soporte 24/7"],
-      category: "mantenimiento",
+        'Servicios integrales de construcción eléctrica y mantenimiento preventivo. Garantizamos el funcionamiento óptimo de sus instalaciones.',
+      image: './assets/images/services/service.webp',
+      alt: 'Técnico realizando mantenimiento preventivo en tablero eléctrico industrial',
+      features: [
+        'Mantenimiento preventivo',
+        'Reparaciones urgentes',
+        'Actualizaciones',
+        'Soporte 24/7',
+      ],
+      category: 'mantenimiento',
     },
   ]
 
@@ -52,12 +61,16 @@ const Services = () => {
       >
         {/* Header de la sección */}
         <header className="text-center mb-16">
-          <h2 id="services-heading" className="text-4xl sm:text-5xl lg:text-6xl mb-6 font-semibold text-gray-900">
+          <h2
+            id="services-heading"
+            className="text-4xl sm:text-5xl lg:text-6xl mb-6 font-semibold text-gray-900"
+          >
             Nuestros <span className="text-primary">Servicios</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Ofrecemos soluciones eléctricas integrales con más de 10 años de experiencia en el sector. Desde energía
-            renovable hasta instalaciones industriales complejas.
+            Ofrecemos soluciones eléctricas integrales con más de 10 años de
+            experiencia en el sector. Desde energía renovable hasta
+            instalaciones industriales complejas.
           </p>
         </header>
 
@@ -67,14 +80,16 @@ const Services = () => {
             <ServiceCard
               key={service.id}
               service={service}
-              priority={index < 2} // Priorizar las primeras 2 imágenes
+              priority={index < 2}
             />
           ))}
         </ul>
 
         {/* Call to action */}
         <div className="text-center mt-16">
-          <p className="text-lg text-gray-600 mb-6">¿Necesitas una solución personalizada?</p>
+          <p className="text-lg text-gray-600 mb-6">
+            ¿Necesitas una solución personalizada?
+          </p>
           <a
             href="#contacto"
             className="
@@ -89,8 +104,19 @@ const Services = () => {
             "
           >
             Solicitar Cotización
-            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <svg
+              className="ml-2 w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </a>
         </div>
@@ -101,20 +127,20 @@ const Services = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
+            '@context': 'https://schema.org',
+            '@type': 'Service',
             provider: {
-              "@type": "LocalBusiness",
-              name: "Instalaciones Eléctricas Profesionales",
+              '@type': 'LocalBusiness',
+              name: 'Instalaciones Eléctricas Profesionales',
             },
             hasOfferCatalog: {
-              "@type": "OfferCatalog",
-              name: "Servicios Eléctricos",
+              '@type': 'OfferCatalog',
+              name: 'Servicios Eléctricos',
               itemListElement: principalServices.map((service, index) => ({
-                "@type": "Offer",
+                '@type': 'Offer',
                 position: index + 1,
                 itemOffered: {
-                  "@type": "Service",
+                  '@type': 'Service',
                   name: service.title,
                   description: service.description,
                   category: service.category,

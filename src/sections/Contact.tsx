@@ -1,25 +1,25 @@
-"use client"
+'use client'
 
-import type React from "react"
-import { useState, useRef, useEffect } from "react"
-import emailjs from "@emailjs/browser"
-import type { IContactForm } from "../types/IContact"
+import type React from 'react'
+import { useState, useRef, useEffect } from 'react'
+import emailjs from '@emailjs/browser'
+import type { IContactForm } from '../types/IContact'
 
 const Contact = () => {
   const [formData, setFormData] = useState<IContactForm>({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-    urgency: "media",
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: '',
+    urgency: 'baja',
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<{
-    type: "success" | "error" | null
+    type: 'success' | 'error' | null
     message: string
-  }>({ type: null, message: "" })
+  }>({ type: null, message: '' })
 
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
@@ -35,8 +35,8 @@ const Contact = () => {
       },
       {
         threshold: 0.1,
-        rootMargin: "50px",
-      },
+        rootMargin: '50px',
+      }
     )
 
     if (sectionRef.current) {
@@ -51,16 +51,19 @@ const Contact = () => {
   }, [])
 
   const services = [
-    "Sistemas Fotovoltaicos",
-    "Electricidad Industrial",
-    "Obras y Mantenimiento",
-    "Instalaciones Residenciales",
-    "Consulta General",
+    'Sistemas Fotovoltaicos',
+    'Electricidad Industrial',
+    'Obras y Mantenimiento',
+    'Consulta General',
   ]
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [name]: value,
     }))
@@ -69,13 +72,18 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    setSubmitStatus({ type: null, message: "" })
+    setSubmitStatus({ type: null, message: '' })
 
     // Validación básica
-    if (!formData.name || !formData.email || !formData.service || !formData.message) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.service ||
+      !formData.message
+    ) {
       setSubmitStatus({
-        type: "error",
-        message: "Por favor completa todos los campos obligatorios.",
+        type: 'error',
+        message: 'Por favor completa todos los campos obligatorios.',
       })
       setIsSubmitting(false)
       return
@@ -85,8 +93,8 @@ const Contact = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.email)) {
       setSubmitStatus({
-        type: "error",
-        message: "Por favor ingresa un email válido.",
+        type: 'error',
+        message: 'Por favor ingresa un email válido.',
       })
       setIsSubmitting(false)
       return
@@ -97,16 +105,25 @@ const Contact = () => {
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
-        phone: formData.phone || "No proporcionado",
+        phone: formData.phone || 'No proporcionado',
         service: formData.service,
         urgency: formData.urgency.toUpperCase(),
         message: formData.message,
-        to_name: "Instalaciones Eléctricas", // Tu nombre/empresa
+        to_name: 'Instalaciones Eléctricas', // Tu nombre/empresa
         reply_to: formData.email,
         // Información adicional para el template
-        urgency_color: formData.urgency === "alta" ? "#dc2626" : formData.urgency === "media" ? "#d97706" : "#16a34a",
+        urgency_color:
+          formData.urgency === 'alta'
+            ? '#dc2626'
+            : formData.urgency === 'media'
+            ? '#d97706'
+            : '#16a34a',
         estimated_response:
-          formData.urgency === "alta" ? "2-4 horas" : formData.urgency === "media" ? "24 horas" : "48 horas",
+          formData.urgency === 'alta'
+            ? '2-4 horas'
+            : formData.urgency === 'media'
+            ? '24 horas'
+            : '48 horas',
       }
 
       // Enviar email principal
@@ -114,7 +131,7 @@ const Contact = () => {
         process.env.VITE_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.VITE_PUBLIC_EMAILJS_TEMPLATE_ID!,
         templateParams,
-        process.env.VITE_PUBLIC_EMAILJS_PUBLIC_KEY!,
+        process.env.VITE_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
 
       if (result.status === 200) {
@@ -126,50 +143,58 @@ const Contact = () => {
           urgency: formData.urgency,
           message: formData.message,
           estimated_response:
-            formData.urgency === "alta" ? "2-4 horas" : formData.urgency === "media" ? "24 horas" : "48 horas",
-          company_name: "Instalaciones Eléctricas Profesionales",
-          company_phone: "+54 11 1234-5678",
-          company_email: "info@tuempresa.com",
+            formData.urgency === 'alta'
+              ? '2-4 horas'
+              : formData.urgency === 'media'
+              ? '24 horas'
+              : '48 horas',
+          company_name: 'Instalaciones Eléctricas Profesionales',
+          company_phone: '+54 11 1234-5678',
+          company_email: 'info@tuempresa.com',
         }
 
         // Enviar confirmación (opcional - necesitas crear un segundo template)
         try {
           await emailjs.send(
-            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-            process.env.NEXT_PUBLIC_EMAILJS_CONFIRMATION_TEMPLATE_ID!, // Template de confirmación
+            process.env.VITE_PUBLIC_EMAILJS_SERVICE_ID!,
+            process.env.VITE_PUBLIC_EMAILJS_CONFIRMATION_TEMPLATE_ID!, // Template de confirmación
             confirmationParams,
-            process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+            process.env.VITE_PUBLIC_EMAILJS_PUBLIC_KEY!
           )
         } catch (confirmationError) {
-          console.log("Error enviando confirmación:", confirmationError)
+          console.log('Error enviando confirmación:', confirmationError)
           // No mostramos error al usuario, el email principal se envió correctamente
         }
 
         setSubmitStatus({
-          type: "success",
-          message: "¡Mensaje enviado correctamente! Te responderemos pronto.",
+          type: 'success',
+          message: '¡Mensaje enviado correctamente! Te responderemos pronto.',
         })
 
         // Resetear formulario
         setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          service: "",
-          message: "",
-          urgency: "media",
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: '',
+          urgency: 'media',
         })
 
         // Scroll al mensaje de éxito
         if (formRef.current) {
-          formRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
+          formRef.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          })
         }
       }
     } catch (error) {
-      console.error("Error enviando email:", error)
+      console.error('Error enviando email:', error)
       setSubmitStatus({
-        type: "error",
-        message: "Error al enviar el mensaje. Por favor inténtalo de nuevo o contáctanos directamente.",
+        type: 'error',
+        message:
+          'Error al enviar el mensaje. Por favor inténtalo de nuevo o contáctanos directamente.',
       })
     } finally {
       setIsSubmitting(false)
@@ -191,7 +216,11 @@ const Contact = () => {
             className={`
             text-4xl sm:text-5xl lg:text-6xl mb-6 font-semibold text-gray-900
             transition-all duration-1000 ease-out
-            ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+            ${
+              isVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+            }
           `}
           >
             <span className="text-primary">Contáctanos</span>
@@ -200,16 +229,25 @@ const Contact = () => {
             className={`
             text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-4
             transition-all duration-1000 ease-out delay-200
-            ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+            ${
+              isVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+            }
           `}
           >
-            ¿Tienes preguntas o necesitas un presupuesto? Estamos aquí para ayudarte.
+            ¿Tienes preguntas o necesitas un presupuesto? Estamos aquí para
+            ayudarte.
           </p>
           <p
             className={`
             text-2xl sm:text-3xl font-bold text-primary uppercase tracking-wide
             transition-all duration-1000 ease-out delay-400
-            ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
+            ${
+              isVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+            }
           `}
           >
             Respuesta garantizada en 24 horas
@@ -222,16 +260,27 @@ const Contact = () => {
             <div
               className={`
               space-y-8 transition-all duration-1000 ease-out delay-600
-              ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}
+              ${
+                isVisible
+                  ? 'opacity-100 translate-x-0'
+                  : 'opacity-0 -translate-x-8'
+              }
             `}
             >
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Información de Contacto</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                  Información de Contacto
+                </h3>
 
                 <div className="space-y-4">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -242,7 +291,10 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Teléfono</p>
-                      <a href="tel:+5411123456789" className="text-gray-600 hover:text-primary transition-colors">
+                      <a
+                        href="tel:+5411123456789"
+                        className="text-gray-600 hover:text-primary transition-colors"
+                      >
                         +54 11 1234-5678
                       </a>
                     </div>
@@ -250,7 +302,12 @@ const Contact = () => {
 
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -272,7 +329,12 @@ const Contact = () => {
 
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -295,7 +357,12 @@ const Contact = () => {
 
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -316,43 +383,33 @@ const Contact = () => {
               {/* WhatsApp */}
               <div className="bg-green-50 border border-green-200 rounded-xl p-6">
                 <h4 className="text-lg font-bold text-green-800 mb-3 flex items-center">
-                  <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                   </svg>
                   WhatsApp Directo
                 </h4>
-                <p className="text-green-700 text-sm mb-3">¿Necesitas respuesta inmediata? Escríbenos por WhatsApp</p>
+                <p className="text-green-700 text-sm mb-3">
+                  ¿Necesitas respuesta inmediata? Escríbenos por WhatsApp
+                </p>
                 <a
                   href="https://wa.me/5492613897545?text=Hola,%20me%20interesa%20información%20sobre%20sus%20servicios%20eléctricos"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
                 >
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                   </svg>
                   Chatear Ahora
                 </a>
-              </div>
-
-              {/* Servicios de emergencia */}
-              <div className="bg-red-50 border border-red-200 rounded-xl p-6">
-                <h4 className="text-lg font-bold text-red-800 mb-2 flex items-center">
-                  <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                      fillRule="evenodd"
-                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Emergencias 24/7
-                </h4>
-                <p className="text-red-700 text-sm">
-                  Para emergencias eléctricas fuera del horario comercial, llama al:{" "}
-                  <a href="tel:+5411999900000" className="font-bold hover:underline">
-                    +54 11 9999-0000
-                  </a>
-                </p>
               </div>
             </div>
 
@@ -363,7 +420,11 @@ const Contact = () => {
               className={`
                 bg-white rounded-2xl shadow-xl p-8 space-y-6
                 transition-all duration-1000 ease-out delay-800
-                ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}
+                ${
+                  isVisible
+                    ? 'opacity-100 translate-x-0'
+                    : 'opacity-0 translate-x-8'
+                }
               `}
               aria-label="Formulario de contacto"
             >
@@ -373,9 +434,9 @@ const Contact = () => {
                   className={`
                     p-4 rounded-lg border text-sm font-medium
                     ${
-                      submitStatus.type === "success"
-                        ? "bg-green-50 border-green-200 text-green-800"
-                        : "bg-red-50 border-red-200 text-red-800"
+                      submitStatus.type === 'success'
+                        ? 'bg-green-50 border-green-200 text-green-800'
+                        : 'bg-red-50 border-red-200 text-red-800'
                     }
                   `}
                   role="alert"
@@ -383,11 +444,14 @@ const Contact = () => {
                   {submitStatus.message}
                 </div>
               )}
-
               {/* Campos del formulario */}
+              <p className="text-2xl font-bold"> O envianos un correo</p>{' '}
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Nombre completo *
                   </label>
                   <input
@@ -401,9 +465,11 @@ const Contact = () => {
                     placeholder="Tu nombre completo"
                   />
                 </div>
-
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Email *
                   </label>
                   <input
@@ -418,10 +484,12 @@ const Contact = () => {
                   />
                 </div>
               </div>
-
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Teléfono
                   </label>
                   <input
@@ -436,7 +504,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="service" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label
+                    htmlFor="service"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Servicio de interés *
                   </label>
                   <select
@@ -448,7 +519,7 @@ const Contact = () => {
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors duration-300"
                   >
                     <option value="">Selecciona un servicio</option>
-                    {services.map((service) => (
+                    {services.map(service => (
                       <option key={service} value={service}>
                         {service}
                       </option>
@@ -456,9 +527,11 @@ const Contact = () => {
                   </select>
                 </div>
               </div>
-
               <div>
-                <label htmlFor="urgency" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label
+                  htmlFor="urgency"
+                  className="block text-sm font-semibold text-gray-700 mb-2"
+                >
                   Urgencia del proyecto
                 </label>
                 <select
@@ -468,14 +541,15 @@ const Contact = () => {
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition-colors duration-300"
                 >
-                  <option value="baja">Baja - Puedo esperar (48-72 horas)</option>
-                  <option value="media">Media - Normal (24 horas)</option>
-                  <option value="alta">Alta - Urgente (2-4 horas)</option>
+                  <option value="baja">Puedo esperar (48-72 horas)</option>
+                  <option value="media">Preferencial (24 horas)</option>
                 </select>
               </div>
-
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-semibold text-gray-700 mb-2"
+                >
                   Mensaje *
                 </label>
                 <textarea
@@ -489,7 +563,6 @@ const Contact = () => {
                   placeholder="Cuéntanos sobre tu proyecto, ubicación, presupuesto estimado, etc."
                 />
               </div>
-
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -498,8 +571,8 @@ const Contact = () => {
                   transition-all duration-300 ease-out transform
                   ${
                     isSubmitting
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-primary hover:bg-primary/90 active:bg-primary/80 hover:scale-105 active:scale-95"
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-primary hover:bg-primary/90 active:bg-primary/80 hover:scale-105 active:scale-95'
                   }
                   text-white shadow-lg hover:shadow-xl
                   focus:outline-none focus:ring-4 focus:ring-primary/30
@@ -530,12 +603,12 @@ const Contact = () => {
                     Enviando...
                   </span>
                 ) : (
-                  "Enviar Mensaje"
+                  'Enviar Mensaje'
                 )}
               </button>
-
               <p className="text-xs text-gray-500 text-center">
-                * Campos obligatorios. Respetamos tu privacidad y no compartimos tu información.
+                * Campos obligatorios. Respetamos tu privacidad y no compartimos
+                tu información.
               </p>
             </form>
           </div>
@@ -547,24 +620,24 @@ const Contact = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ContactPage",
+            '@context': 'https://schema.org',
+            '@type': 'ContactPage',
             mainEntity: {
-              "@type": "LocalBusiness",
-              name: "Instalaciones Eléctricas Profesionales",
-              telephone: "+54-11-1234-5678",
-              email: "info@tuempresa.com",
+              '@type': 'LocalBusiness',
+              name: 'Instalaciones Eléctricas Profesionales',
+              telephone: '+54-11-1234-5678',
+              email: 'info@tuempresa.com',
               address: {
-                "@type": "PostalAddress",
-                addressLocality: "Buenos Aires",
-                addressCountry: "AR",
+                '@type': 'PostalAddress',
+                addressLocality: 'Buenos Aires',
+                addressCountry: 'AR',
               },
-              openingHours: ["Mo-Fr 08:00-18:00", "Sa 09:00-14:00"],
+              openingHours: ['Mo-Fr 08:00-18:00', 'Sa 09:00-14:00'],
               contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+54-11-1234-5678",
-                contactType: "customer service",
-                availableLanguage: "Spanish",
+                '@type': 'ContactPoint',
+                telephone: '+54-11-1234-5678',
+                contactType: 'customer service',
+                availableLanguage: 'Spanish',
               },
             },
           }),

@@ -9,13 +9,13 @@ import WhyChooseUs from '../sections/WhyChooseUs'
 
 const MainLayout = () => {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Header />
       <Hero />
       <Services />
       <WhyChooseUs />
       <LatestsWorks />
-      <AboutUs/>
+      <AboutUs />
       <Contact />
       <Footer />
     </main>

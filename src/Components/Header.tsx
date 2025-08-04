@@ -1,14 +1,14 @@
-"use client"
+'use client'
 
-import type React from "react"
+import type React from 'react'
 
-import { useState, useEffect, useRef } from "react"
-import { navLinks } from "../constants/navLinks"
-import type { INavLink } from "../types/Invigation"
+import { useState, useEffect, useRef } from 'react'
+import { navLinks } from '../constants/navLinks'
+import type { INavLink } from '../types/Invigation'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState("inicio")
+  const [activeSection, setActiveSection] = useState('inicio')
   const [isScrolled, setIsScrolled] = useState(false)
   const [logoLoaded, setLogoLoaded] = useState(false)
   const [logoError, setLogoError] = useState(false)
@@ -21,7 +21,9 @@ const Header = () => {
       setIsScrolled(scrollPosition > 50)
 
       // Detectar sección activa
-      const sections = navLinks.map((link) => link.href.replace("#", "")).filter((href) => href !== "")
+      const sections = navLinks
+        .map(link => link.href.replace('#', ''))
+        .filter(href => href !== '')
 
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId)
@@ -35,68 +37,85 @@ const Header = () => {
       }
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll() // Ejecutar una vez al montar
 
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   // Cerrar menú al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      // Excluir el botón hamburger del click outside
+      const target = event.target as Node
+      const hamburgerButton = document.querySelector('[aria-label*="menú"]')
+
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(target) &&
+        hamburgerButton &&
+        !hamburgerButton.contains(target)
+      ) {
         setIsOpen(false)
       }
     }
 
     if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside)
-      document.body.style.overflow = "hidden" // Prevenir scroll
+      document.addEventListener('mousedown', handleClickOutside)
+      // Prevenir scroll horizontal y vertical
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflowX = 'hidden'
     } else {
-      document.body.style.overflow = "unset"
+      document.body.style.overflow = 'unset'
+      document.documentElement.style.overflowX = 'unset'
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-      document.body.style.overflow = "unset"
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.body.style.overflow = 'unset'
+      document.documentElement.style.overflowX = 'unset'
     }
   }, [isOpen])
 
   // Cerrar menú con Escape
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
         setIsOpen(false)
       }
     }
 
     if (isOpen) {
-      document.addEventListener("keydown", handleEscape)
+      document.addEventListener('keydown', handleEscape)
     }
 
-    return () => document.removeEventListener("keydown", handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
   }, [isOpen])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, link: INavLink) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    link: INavLink
+  ) => {
     e.preventDefault()
     setIsOpen(false)
 
-    if (link.href === "#") {
-      window.scrollTo({ top: 0, behavior: "smooth" })
+    if (link.href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
 
-    const targetId = link.href.replace("#", "")
+    const targetId = link.href.replace('#', '')
     const targetElement = document.getElementById(targetId)
 
     if (targetElement) {
       const headerHeight = 80 // Altura del header
-      const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset
+      const elementPosition =
+        targetElement.getBoundingClientRect().top + window.pageYOffset
       const offsetPosition = elementPosition - headerHeight
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth",
+        behavior: 'smooth',
       })
     }
   }
@@ -106,8 +125,8 @@ const Header = () => {
   }
 
   const isLinkActive = (link: INavLink) => {
-    if (link.href === "#") return activeSection === "inicio"
-    return activeSection === link.href.replace("#", "")
+    if (link.href === '#') return activeSection === 'inicio'
+    return activeSection === link.href.replace('#', '')
   }
 
   return (
@@ -117,17 +136,19 @@ const Header = () => {
           w-full fixed top-0 left-0 z-50 transition-all duration-300 ease-out
           ${
             isScrolled
-              ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50"
-              : "bg-white/90 backdrop-blur-sm"
+              ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200/50'
+              : 'bg-white/90 backdrop-blur-sm'
           }
         `}
       >
-        <div className="mx-auto px-4 sm:px-6 md:px-16 lg:px-32">
+        <div className="mx-auto px-4 sm:px-6 md:px-16 lg:px-32 overflow-x-hidden">
           <article className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex items-center space-x-3">
               <div className="relative w-12 h-12 sm:w-14 sm:h-14">
-                {!logoLoaded && !logoError && <div className="w-full h-full bg-gray-200 rounded-xl animate-pulse" />}
+                {!logoLoaded && !logoError && (
+                  <div className="w-full h-full bg-gray-200 rounded-xl animate-pulse" />
+                )}
 
                 {!logoError ? (
                   <img
@@ -136,7 +157,7 @@ const Header = () => {
                     className={`
                       w-full h-full object-cover rounded-xl shadow-md
                       transition-all duration-500 hover:scale-105
-                      ${logoLoaded ? "opacity-100" : "opacity-0"}
+                      ${logoLoaded ? 'opacity-100' : 'opacity-0'}
                     `}
                     loading="eager"
                     onLoad={() => setLogoLoaded(true)}
@@ -151,24 +172,35 @@ const Header = () => {
 
               {/* Nombre de la empresa (opcional, solo en desktop) */}
               <div className="hidden sm:block">
-                <h1 className="text-lg font-bold text-gray-900 leading-tight">OSE</h1>
-                <p className="text-xs text-gray-600">Instalaciones Eléctricas</p>
+                <h1 className="text-lg font-bold text-gray-900 leading-tight">
+                  OSE
+                </h1>
+                <p className="text-xs text-gray-600">
+                  Instalaciones Eléctricas
+                </p>
               </div>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-1" aria-label="Navegación principal">
-              {navLinks.map((link) => (
+            <nav
+              className="hidden md:flex items-center space-x-1"
+              aria-label="Navegación principal"
+            >
+              {navLinks.map(link => (
                 <a
                   key={link.id}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link)}
+                  onClick={e => handleNavClick(e, link)}
                   className={`
                     relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ease-out
                     hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/50
-                    ${isLinkActive(link) ? "text-primary bg-primary/10" : "text-gray-700 hover:text-gray-900"}
+                    ${
+                      isLinkActive(link)
+                        ? 'text-primary bg-primary/10'
+                        : 'text-gray-700 hover:text-gray-900'
+                    }
                   `}
-                  aria-current={isLinkActive(link) ? "page" : undefined}
+                  aria-current={isLinkActive(link) ? 'page' : undefined}
                 >
                   <span className="flex items-center space-x-2">
                     <span className="text-base">{link.icon}</span>
@@ -187,7 +219,13 @@ const Header = () => {
             <div className="hidden md:block">
               <a
                 href="#contacto"
-                onClick={(e) => handleNavClick(e, { id: "contacto", label: "Contacto", href: "#contacto" })}
+                onClick={e =>
+                  handleNavClick(e, {
+                    id: 'contacto',
+                    label: 'Contacto',
+                    href: '#contacto',
+                  })
+                }
                 className="
                   inline-flex items-center px-6 py-2.5 bg-primary hover:bg-primary/90 
                   text-white font-medium text-sm rounded-lg shadow-md hover:shadow-lg
@@ -195,7 +233,12 @@ const Header = () => {
                   focus:outline-none focus:ring-2 focus:ring-primary/50
                 "
               >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -211,26 +254,27 @@ const Header = () => {
             <button
               onClick={toggleMenu}
               className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-colors duration-200"
-              aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
               aria-expanded={isOpen}
+              id="mobile-menu-button"
             >
               <div className="w-6 h-6 flex flex-col justify-center items-center">
                 <span
                   className={`
                     block h-0.5 w-6 bg-gray-700 transition-all duration-300 ease-out
-                    ${isOpen ? "rotate-45 translate-y-0.5" : "-translate-y-1"}
+                    ${isOpen ? 'rotate-45 translate-y-0.5' : '-translate-y-1'}
                   `}
                 />
                 <span
                   className={`
                     block h-0.5 w-6 bg-gray-700 transition-all duration-300 ease-out
-                    ${isOpen ? "opacity-0" : "opacity-100"}
+                    ${isOpen ? 'opacity-0' : 'opacity-100'}
                   `}
                 />
                 <span
                   className={`
                     block h-0.5 w-6 bg-gray-700 transition-all duration-300 ease-out
-                    ${isOpen ? "-rotate-45 -translate-y-0.5" : "translate-y-1"}
+                    ${isOpen ? '-rotate-45 -translate-y-0.5' : 'translate-y-1'}
                   `}
                 />
               </div>
@@ -253,8 +297,12 @@ const Header = () => {
           className={`
             fixed top-20 right-0 h-[calc(100vh-5rem)] w-80 max-w-[85vw] bg-white shadow-2xl
             transform transition-transform duration-300 ease-out md:hidden z-50
-            ${isOpen ? "translate-x-0" : "translate-x-full"}
+            ${isOpen ? 'translate-x-0' : 'translate-x-full'}
           `}
+          style={{
+            maxWidth: 'min(320px, 85vw)',
+            right: isOpen ? '0' : '-100%',
+          }}
         >
           <nav className="flex flex-col h-full" aria-label="Navegación móvil">
             {/* Header del menú móvil */}
@@ -268,11 +316,15 @@ const Header = () => {
                 <a
                   key={link.id}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link)}
+                  onClick={e => handleNavClick(e, link)}
                   className={`
                     flex items-center justify-between px-6 py-4 text-base font-medium
                     transition-all duration-200 ease-out hover:bg-gray-50
-                    ${isLinkActive(link) ? "text-primary bg-primary/5 border-r-2 border-primary" : "text-gray-700"}
+                    ${
+                      isLinkActive(link)
+                        ? 'text-primary bg-primary/5 border-r-2 border-primary'
+                        : 'text-gray-700'
+                    }
                   `}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
@@ -282,13 +334,18 @@ const Header = () => {
                   </div>
                   <svg
                     className={`w-5 h-5 transition-transform duration-200 ${
-                      isLinkActive(link) ? "text-primary" : "text-gray-400"
+                      isLinkActive(link) ? 'text-primary' : 'text-gray-400'
                     }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
                   </svg>
                 </a>
               ))}
@@ -298,13 +355,24 @@ const Header = () => {
             <div className="px-6 py-4 border-t border-gray-200 space-y-4">
               <a
                 href="#contacto"
-                onClick={(e) => handleNavClick(e, { id: "contacto", label: "Contacto", href: "#contacto" })}
+                onClick={e =>
+                  handleNavClick(e, {
+                    id: 'contacto',
+                    label: 'Contacto',
+                    href: '#contacto',
+                  })
+                }
                 className="
                   w-full flex items-center justify-center px-4 py-3 bg-primary hover:bg-primary/90 
                   text-white font-medium rounded-lg shadow-md transition-all duration-200
                 "
               >
-                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-4 h-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
