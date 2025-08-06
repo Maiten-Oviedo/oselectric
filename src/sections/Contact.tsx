@@ -149,7 +149,7 @@ const Contact = () => {
               ? '24 horas'
               : '48 horas',
           company_name: 'Instalaciones Eléctricas Profesionales',
-          company_phone: '+54 11 1234-5678',
+          company_phone: '+54 9 261 533-3891',
           company_email: 'info@tuempresa.com',
         }
 

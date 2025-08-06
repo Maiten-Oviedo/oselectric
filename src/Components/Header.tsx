@@ -343,14 +343,7 @@ const Header = () => {
             {/* Footer del menú móvil */}
             <div className="px-6 py-4 border-t border-gray-200 space-y-4">
               <a
-                href="https://wa.me/5491123456789"
-                onClick={e =>
-                  handleNavClick(e, {
-                    id: 'contacto',
-                    label: 'Contacto',
-                    href: '#contacto',
-                  })
-                }
+                href="https://wa.me/5492615278495?text=Hola,%20me%20interesa%20saber%20más%20información%20sobre%20sus%20servicios%20eléctricos."
                 rel="noopener noreferrer"
                 className="
                   w-full flex gap-2 items-center justify-center px-4 py-3 bg-primary hover:bg-primary/90 
@@ -372,7 +365,7 @@ const Header = () => {
                     className="hover:underline"
                     aria-label="Llamar al número +54 11 1234-5678"
                   >
-                    +54 9 261553-3891
+                    +54 9 261 533-3891
                   </a>
                 </p>
                 <p>

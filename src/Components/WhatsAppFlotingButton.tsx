@@ -84,7 +84,7 @@ const WhatsAppFloatingButton = () => {
           isOpen ? 'Cerrar chat de WhatsApp' : 'Abrir chat de WhatsApp'
         }
       >
-        <WhatsAppIcon className="size-12" />
+        <WhatsAppIcon className="size-14" />
       </button>
     </div>
   )
