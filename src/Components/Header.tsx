@@ -216,8 +216,8 @@ const Header = () => {
               <a
                 href="mailto:info@ose.com"
                 className="
-                  inline-flex items-center px-6 py-2.5 bg-primary hover:bg-primary/90 
-                  text-white font-medium text-sm rounded-lg shadow-md hover:shadow-lg
+                  inline-flex items-center px-6 py-2.5 bg-primary-bold hover:bg-primary/90 
+                  text-white font-normal text-sm rounded-lg shadow-md hover:shadow-lg
                   transition-all duration-300 ease-out transform hover:scale-105
                   focus:outline-none focus:ring-2 focus:ring-primary/50
                 "

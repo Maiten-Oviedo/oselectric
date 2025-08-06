@@ -65,7 +65,7 @@ const Hero = () => {
               onClick={handleScrollToContact}
               className="
                 inline-flex items-center justify-center
-                bg-primary hover:bg-primary/90 active:bg-primary/80
+                bg-primary-bold hover:bg-primary/90 active:bg-primary/80
                 text-white font-medium text-lg
                 px-8 py-4 rounded-lg
                 shadow-lg hover:shadow-xl

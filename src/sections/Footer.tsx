@@ -308,14 +308,14 @@ const Footer = () => {
               <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 {/* Copyright */}
                 <div className="text-center md:text-left">
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-gray-700">
                     © {currentYear}{' '}
                     <span className="font-semibold text-primary">
                       OSE Servicios Eléctricos
                     </span>
                     . Todos los derechos reservados.
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-gray-700 mt-1">
                     Desarrollado con ❤️ para brindar el mejor servicio
                     eléctrico. By{' '}
                     <a
