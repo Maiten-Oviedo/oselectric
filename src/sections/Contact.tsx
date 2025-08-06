@@ -157,13 +157,12 @@ const Contact = () => {
         try {
           await emailjs.send(
             process.env.VITE_PUBLIC_EMAILJS_SERVICE_ID!,
-            process.env.VITE_PUBLIC_EMAILJS_CONFIRMATION_TEMPLATE_ID!, // Template de confirmación
+            process.env.VITE_PUBLIC_EMAILJS_CONFIRMATION_TEMPLATE_ID!,
             confirmationParams,
             process.env.VITE_PUBLIC_EMAILJS_PUBLIC_KEY!
           )
         } catch (confirmationError) {
           console.log('Error enviando confirmación:', confirmationError)
-          // No mostramos error al usuario, el email principal se envió correctamente
         }
 
         setSubmitStatus({

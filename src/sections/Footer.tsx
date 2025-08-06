@@ -4,6 +4,9 @@ import type React from 'react'
 import { useState, useRef, useEffect } from 'react'
 import type { IFooterLink } from '../types/footer'
 import { footerSections, socialLinks } from '../constants/footerData'
+import InstagramIcon from '../assets/icons/InstagramIcon'
+import WhatsAppIcon from '../assets/icons/WhatsAppIcon'
+import FacebookIcon from '../assets/icons/FacebookIcon'
 const Footer = () => {
   const [logoLoaded, setLogoLoaded] = useState(false)
   const [logoError, setLogoError] = useState(false)
@@ -155,7 +158,7 @@ const Footer = () => {
 
                 {/* Descripción */}
                 <p className="text-gray-600 text-sm leading-relaxed mb-6 text-center lg:text-left">
-                  Más de 10 años brindando soluciones eléctricas integrales con
+                  Más de 20 años brindando soluciones eléctricas integrales con
                   la más alta calidad y tecnología de vanguardia.
                 </p>
 
@@ -181,14 +184,22 @@ const Footer = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`
-                        w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center
-                        text-gray-600 ${social.color} transition-all duration-300 hover:scale-110 hover:shadow-lg
+                          flex items-center justify-center
+                        text-gray-600 transition-all duration-300 hover:scale-110
                         focus:outline-none focus:ring-2 focus:ring-primary/50
                       `}
                       aria-label={`Síguenos en ${social.name}`}
                       style={{ animationDelay: `${index * 100}ms` }}
                     >
-                      <span className="text-lg">{social.icon}</span>
+                      {social.icon === 'InstagramIcon' && (
+                        <InstagramIcon className="size-8" />
+                      )}
+                      {social.icon === 'WhatsAppIcon' && (
+                        <WhatsAppIcon className="size-8" />
+                      )}
+                      {social.icon === 'FacebookIcon' && (
+                        <FacebookIcon className="size-8" />
+                      )}
                     </a>
                   ))}
                 </div>

@@ -5,6 +5,7 @@ import type React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { navLinks } from '../constants/navLinks'
 import type { INavLink } from '../types/Invigation'
+import WhatsAppIcon from '../assets/icons/WhatsAppIcon'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -354,7 +355,7 @@ const Header = () => {
             {/* Footer del menú móvil */}
             <div className="px-6 py-4 border-t border-gray-200 space-y-4">
               <a
-                href="#contacto"
+                href="https://wa.me/5491123456789"
                 onClick={e =>
                   handleNavClick(e, {
                     id: 'contacto',
@@ -362,31 +363,40 @@ const Header = () => {
                     href: '#contacto',
                   })
                 }
+                rel="noopener noreferrer"
                 className="
-                  w-full flex items-center justify-center px-4 py-3 bg-primary hover:bg-primary/90 
+                  w-full flex gap-2 items-center justify-center px-4 py-3 bg-primary hover:bg-primary/90 
                   text-white font-medium rounded-lg shadow-md transition-all duration-200
                 "
               >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                  />
-                </svg>
+                <i className="bg-white rounded-full">
+                  <WhatsAppIcon className="size-6" />
+                </i>
                 Solicitar Cotización
               </a>
 
               {/* Información de contacto rápida */}
               <div className="text-center text-sm text-gray-600">
-                <p>📞 +54 11 1234-5678</p>
-                <p>📧 info@ose.com</p>
+                <p>
+                  📞{' '}
+                  <a
+                    href="tel:+541112345678"
+                    className="hover:underline"
+                    aria-label="Llamar al número +54 11 1234-5678"
+                  >
+                    +54 11 1234-5678
+                  </a>
+                </p>
+                <p>
+                  📧{' '}
+                  <a
+                    href="mailto:info@ose.com"
+                    className="hover:underline"
+                    aria-label="Enviar correo a info@ose.com"
+                  >
+                    info@ose.com
+                  </a>
+                </p>
               </div>
             </div>
           </nav>

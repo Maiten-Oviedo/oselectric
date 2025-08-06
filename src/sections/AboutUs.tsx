@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import type { ICompanyValue, ITeamMember } from '../types/ITeamMember'
 import TeamMemberCard from '../Components/TeamMemberCard'
 import MissionVision from '../Components/MissionVision'
+import { companyValues, teamMembers } from '../constants/aboutData'
 const AboutUs = () => {
   const [activeTab, setActiveTab] = useState<'historia' | 'equipo' | 'valores'>(
     'historia'
@@ -35,96 +35,6 @@ const AboutUs = () => {
       }
     }
   }, [])
-
-  const teamMembers: ITeamMember[] = [
-    {
-      id: 'carlos-rodriguez',
-      name: 'Carlos Rodríguez',
-      position: 'Director Técnico',
-      description:
-        'Ingeniero Electricista con más de 15 años de experiencia en proyectos industriales y residenciales de gran envergadura.',
-      image: './assets/images/team/carlos-rodriguez.webp',
-      alt: 'Carlos Rodríguez, Director Técnico de Instalaciones Eléctricas, ingeniero con casco y equipo de seguridad',
-      experience: '15+ años',
-      specialties: [
-        'Instalaciones Industriales',
-        'Sistemas Fotovoltaicos',
-        'Alta Tensión',
-      ],
-      certifications: [
-        'Ingeniero Electricista',
-        'Certificación ISO 9001',
-        'Habilitación Municipal',
-      ],
-    },
-    {
-      id: 'maria-gonzalez',
-      name: 'María González',
-      position: 'Especialista en Energía Solar',
-      description:
-        'Técnica especializada en sistemas fotovoltaicos con certificaciones internacionales en energías renovables.',
-      image: './assets/images/team/maria-gonzalez.webp',
-      alt: 'María González, Especialista en Energía Solar, técnica revisando paneles solares',
-      experience: '8+ años',
-      specialties: [
-        'Paneles Solares',
-        'Inversores',
-        'Sistemas de Almacenamiento',
-      ],
-      certifications: [
-        'Técnica en Energías Renovables',
-        'Certificación NABCEP',
-        'Curso Avanzado en Fotovoltaica',
-      ],
-    },
-    {
-      id: 'juan-martinez',
-      name: 'Juan Martínez',
-      position: 'Jefe de Mantenimiento',
-      description:
-        'Especialista en mantenimiento preventivo y correctivo con amplia experiencia en instalaciones comerciales.',
-      image: './assets/images/team/juan-martinez.webp',
-      alt: 'Juan Martínez, Jefe de Mantenimiento, técnico trabajando en tablero eléctrico',
-      experience: '12+ años',
-      specialties: [
-        'Mantenimiento Preventivo',
-        'Diagnóstico de Fallas',
-        'Automatización',
-      ],
-      certifications: [
-        'Técnico Electricista',
-        'Especialización en Mantenimiento',
-        'Certificación en Seguridad',
-      ],
-    },
-  ]
-
-  const companyValues: ICompanyValue[] = [
-    {
-      id: 'mision',
-      title: 'Nuestra Misión',
-      description:
-        'Brindar soluciones eléctricas integrales de la más alta calidad, utilizando tecnología de vanguardia y un equipo altamente capacitado para superar las expectativas de nuestros clientes.',
-      icon: '🎯',
-      category: 'mision',
-    },
-    {
-      id: 'vision',
-      title: 'Nuestra Visión',
-      description:
-        'Ser la empresa líder en instalaciones eléctricas y energías renovables en la región, reconocida por nuestra innovación, calidad y compromiso con la sustentabilidad.',
-      icon: '🔮',
-      category: 'vision',
-    },
-    {
-      id: 'valores',
-      title: 'Nuestros Valores',
-      description:
-        'Integridad, excelencia, innovación y compromiso con el medio ambiente guían cada uno de nuestros proyectos y relaciones comerciales.',
-      icon: '⭐',
-      category: 'valores',
-    },
-  ]
 
   const tabs = [
     { id: 'historia', label: 'Nuestra Historia', icon: '📖' },
@@ -218,16 +128,10 @@ const AboutUs = () => {
                     tecnologías del mercado.
                   </p>
                   <p>
-                    Durante estos más de 10 años, hemos completado exitosamente
+                    Durante estos más de 20 años, hemos completado exitosamente
                     más de 500 proyectos, desde instalaciones residenciales
                     hasta complejos sistemas industriales y plantas de energía
                     solar.
-                  </p>
-                  <p>
-                    Nuestro crecimiento constante nos ha permitido expandir
-                    nuestros servicios hacia las energías renovables,
-                    posicionándonos como pioneros en la instalación de sistemas
-                    fotovoltaicos en la región.
                   </p>
                 </div>
 
@@ -239,10 +143,6 @@ const AboutUs = () => {
                   <div className="space-y-3">
                     {[
                       { year: '2014', event: 'Fundación de la empresa' },
-                      {
-                        year: '2017',
-                        event: 'Primer proyecto industrial de gran escala',
-                      },
                       { year: '2019', event: 'Certificación ISO 9001' },
                       {
                         year: '2021',
@@ -264,7 +164,7 @@ const AboutUs = () => {
               {/* Imagen de la empresa */}
               <div className="relative">
                 <img
-                  src="./assets/images/about/company-building.webp"
+                  src="./assets/images/about.webp"
                   alt="Oficinas principales de Instalaciones Eléctricas con equipo técnico y vehículos de servicio"
                   className="w-full h-96 object-cover rounded-2xl shadow-2xl"
                   loading="lazy"

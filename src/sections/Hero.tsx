@@ -2,6 +2,10 @@
 
 import type React from 'react'
 import ParallaxImage from '../Components/ParallaxImage'
+import { socialLinks } from '../constants/footerData'
+import InstagramIcon from '../assets/icons/InstagramIcon'
+import WhatsAppIcon from '../assets/icons/WhatsAppIcon'
+import FacebookIcon from '../assets/icons/FacebookIcon'
 
 const Hero = () => {
   const handleScrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -21,7 +25,7 @@ const Hero = () => {
       <link
         rel="preload"
         as="image"
-        href="/assets/images/hero.jpg"
+        href="/assets/images/hero.webp"
         fetchPriority="high"
       />
 
@@ -92,12 +96,39 @@ const Hero = () => {
             <span id="cta-description" className="sr-only">
               Botón para contactar y solicitar presupuesto
             </span>
+            <div className="flex justify-center lg:justify-start space-x-4">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={social.id}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`
+                          flex items-center justify-center
+                        text-gray-600 transition-all duration-300 hover:scale-110
+                        focus:outline-none focus:ring-2 focus:ring-primary/50
+                      `}
+                  aria-label={`Síguenos en ${social.name}`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  {social.icon === 'InstagramIcon' && (
+                    <InstagramIcon className="size-8" />
+                  )}
+                  {social.icon === 'WhatsAppIcon' && (
+                    <WhatsAppIcon className="size-8" />
+                  )}
+                  {social.icon === 'FacebookIcon' && (
+                    <FacebookIcon className="size-8" />
+                  )}
+                </a>
+              ))}
+            </div>
           </div>
         </article>
 
         {/* Imagen hero con ParallaxImage - FORMA CORRECTA */}
         <ParallaxImage
-          src="/assets/images/hero.jpg"
+          src="/assets/images/hero.webp"
           alt="Instalación eléctrica profesional realizada para YPF - Técnicos especializados trabajando en sistemas eléctricos industriales"
           parallaxSpeed={0.2}
           className="w-full h-[50vh] sm:h-[60vh] md:h-[70vh] rounded-lg md:rounded-xl shadow-2xl"

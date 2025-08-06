@@ -1,35 +1,39 @@
-import LatestWorkCard from "../Components/LatestWorkCard"
+import LatestWorkCard from '../Components/LatestWorkCard'
 
 const LatestWorks = () => {
   const latestWorks = [
     {
       image: null,
-      alt: "Galería de trabajos recientes",
+      alt: 'Galería de trabajos recientes',
     },
     {
-      image: "./assets/images/latestsWorks/servicestation1.jpeg",
-      alt: "Estación de servicio - Vista exterior",
+      image: './assets/images/latestsWorks/servicestation1.webp',
+      alt: 'Estación de servicio - Vista exterior',
     },
     {
-      image: "./assets/images/latestsWorks/servicestation2.jpeg",
-      alt: "Estación de servicio - Área de combustible",
+      image: './assets/images/latestsWorks/servicestation2.webp',
+      alt: 'Estación de servicio - Área de combustible',
     },
     {
-      image: "./assets/images/latestsWorks/servicestation3.jpeg",
-      alt: "Estación de servicio - Interior tienda",
+      image: './assets/images/latestsWorks/servicestation3.webp',
+      alt: 'Estación de servicio - Interior tienda',
     },
     {
-      image: "./assets/images/latestsWorks/living.jpeg",
-      alt: "Diseño de sala de estar moderna",
+      image: './assets/images/latestsWorks/living.webp',
+      alt: 'Diseño de sala de estar moderna',
     },
     {
-      image: "./assets/images/latestsWorks/panels.jpeg",
-      alt: "Instalación de paneles arquitectónicos",
+      image: './assets/images/latestsWorks/panels.webp',
+      alt: 'Instalación de paneles arquitectónicos',
     },
   ]
 
   return (
-    <section className="mt-24 flex justify-center px-4 md:px-24" aria-labelledby="latest-works-heading">
+    <section
+      id="trabajos"
+      className="mt-24 flex justify-center px-4 md:px-24"
+      aria-labelledby="latest-works-heading"
+    >
       {/* Heading oculto para SEO y accesibilidad */}
       <h2 id="latest-works-heading" className="sr-only">
         Nuestros últimos trabajos realizados

@@ -11,6 +11,7 @@ interface Props {
 const WhyChooseUsCard = ({ reason, index }: Props) => {
   const [isVisible, setIsVisible] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(false) // Nuevo estado para detectar móvil
   const cardRef = useRef<HTMLLIElement>(null)
 
   // Intersection Observer para animaciones al scroll
@@ -40,6 +41,19 @@ const WhyChooseUsCard = ({ reason, index }: Props) => {
       }
     }
   }, [index])
+
+  // Detectar si es móvil (usando un breakpoint de Tailwind)
+  useEffect(() => {
+    const checkIsMobile = () => {
+      // Tailwind's 'md' breakpoint is 768px. We'll use that.
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    checkIsMobile() // Check on mount
+    window.addEventListener('resize', checkIsMobile) // Check on resize
+
+    return () => window.removeEventListener('resize', checkIsMobile)
+  }, [])
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -71,6 +85,9 @@ const WhyChooseUsCard = ({ reason, index }: Props) => {
     }
   }
 
+  // Determinar si el contenido expandible debe estar visible
+  const shouldExpand = isMobile ? isVisible : isHovered
+
   return (
     <li
       ref={cardRef}
@@ -78,7 +95,7 @@ const WhyChooseUsCard = ({ reason, index }: Props) => {
         group relative p-6 rounded-2xl border-2 transition-all duration-700 ease-out cursor-pointer
         ${getCategoryBg(reason.category)}
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
-        hover:shadow-xl hover:scale-105 focus-within:scale-105
+        md:hover:shadow-xl md:hover:scale-105 md:focus-within:scale-105
       `}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -117,9 +134,9 @@ const WhyChooseUsCard = ({ reason, index }: Props) => {
       {/* Beneficios expandibles */}
       <div
         className={`
-        space-y-2 transition-all duration-500 ease-out overflow-hidden
-        ${isHovered ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
-      `}
+          space-y-2 transition-all duration-500 ease-out overflow-hidden
+          ${shouldExpand ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
+        `}
       >
         <div className="border-t border-gray-200 pt-4">
           <h4 className="text-sm font-semibold text-gray-700 mb-3 text-center">
@@ -130,13 +147,13 @@ const WhyChooseUsCard = ({ reason, index }: Props) => {
               <li
                 key={benefitIndex}
                 className={`
-                flex items-center text-sm text-gray-600 transition-all duration-300 ease-out
-                ${
-                  isHovered
-                    ? 'translate-x-0 opacity-100'
-                    : 'translate-x-4 opacity-0'
-                }
-              `}
+                  flex items-center text-sm text-gray-600 transition-all duration-300 ease-out
+                  ${
+                    shouldExpand
+                      ? 'translate-x-0 opacity-100'
+                      : 'translate-x-4 opacity-0'
+                  }
+                `}
                 style={{ transitionDelay: `${benefitIndex * 100}ms` }}
               >
                 <svg
@@ -157,25 +174,27 @@ const WhyChooseUsCard = ({ reason, index }: Props) => {
         </div>
       </div>
 
-      {/* Indicador de hover */}
+      {/* Indicador de hover (solo en desktop) */}
       <div
         className={`
-        absolute bottom-4 left-1/2 transform -translate-x-1/2
-        text-xs text-gray-400 transition-opacity duration-300
-        ${isHovered ? 'opacity-0' : 'opacity-100'}
-      `}
+          absolute bottom-4 left-1/2 transform -translate-x-1/2
+          text-xs text-gray-400 transition-opacity duration-300
+          md:${isHovered ? 'opacity-0' : 'opacity-100'}
+          ${isMobile ? 'hidden' : ''}
+        `}
       >
-        Presioná para ver
+        Pasa el cursor para ver más
       </div>
 
-      {/* Efecto de brillo en hover */}
+      {/* Efecto de brillo en hover (solo en desktop) */}
       <div
         className={`
-        absolute inset-0 rounded-2xl bg-gradient-to-r ${getCategoryColor(
-          reason.category
-        )}
-        opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none
-      `}
+          absolute inset-0 rounded-2xl bg-gradient-to-r ${getCategoryColor(
+            reason.category
+          )}
+          md:opacity-0 md:group-hover:opacity-5 transition-opacity duration-300 pointer-events-none
+          ${isMobile ? 'opacity-5' : ''}
+        `}
       />
 
       {/* Screen reader content */}
