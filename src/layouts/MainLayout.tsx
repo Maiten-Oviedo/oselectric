@@ -1,4 +1,5 @@
 import Header from '../Components/Header'
+import WhatsAppFloatingButton from '../Components/WhatsAppFlotingButton'
 import AboutUs from '../sections/AboutUs'
 import Contact from '../sections/Contact'
 import Footer from '../sections/Footer'
@@ -18,6 +19,7 @@ const MainLayout = () => {
       <AboutUs />
       <Contact />
       <Footer />
+      <WhatsAppFloatingButton />
     </main>
   )
 }

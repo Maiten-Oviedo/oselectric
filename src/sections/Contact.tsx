@@ -294,7 +294,7 @@ const Contact = () => {
                         href="tel:+5411123456789"
                         className="text-gray-600 hover:text-primary transition-colors"
                       >
-                        +54 11 1234-5678
+                        +54 9 2615533891
                       </a>
                     </div>
                   </div>
@@ -350,7 +350,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Ubicación</p>
-                      <p className="text-gray-600">Buenos Aires, Argentina</p>
+                      <p className="text-gray-600">Mendoza, Argentina</p>
                     </div>
                   </div>
 
@@ -602,7 +602,7 @@ const Contact = () => {
                     Enviando...
                   </span>
                 ) : (
-                  'Enviar Mensaje'
+                  'Enviar Correo'
                 )}
               </button>
               <p className="text-xs text-gray-500 text-center">

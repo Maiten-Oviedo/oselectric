@@ -195,11 +195,6 @@ const Header = () => {
                   className={`
                     relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ease-out
                     hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/50
-                    ${
-                      isLinkActive(link)
-                        ? 'text-primary bg-primary/10'
-                        : 'text-gray-700 hover:text-gray-900'
-                    }
                   `}
                   aria-current={isLinkActive(link) ? 'page' : undefined}
                 >
@@ -219,14 +214,7 @@ const Header = () => {
             {/* CTA Button (Desktop) */}
             <div className="hidden md:block">
               <a
-                href="#contacto"
-                onClick={e =>
-                  handleNavClick(e, {
-                    id: 'contacto',
-                    label: 'Contacto',
-                    href: '#contacto',
-                  })
-                }
+                href="mailto:info@ose.com"
                 className="
                   inline-flex items-center px-6 py-2.5 bg-primary hover:bg-primary/90 
                   text-white font-medium text-sm rounded-lg shadow-md hover:shadow-lg
@@ -380,11 +368,11 @@ const Header = () => {
                 <p>
                   📞{' '}
                   <a
-                    href="tel:+541112345678"
+                    href="tel:+5492615533891"
                     className="hover:underline"
                     aria-label="Llamar al número +54 11 1234-5678"
                   >
-                    +54 11 1234-5678
+                    +54 9 261553-3891
                   </a>
                 </p>
                 <p>
