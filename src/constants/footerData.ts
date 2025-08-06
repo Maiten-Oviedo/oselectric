@@ -67,7 +67,7 @@ export const socialLinks: ISocialLink[] = [
   {
     id: 'whatsapp',
     name: 'WhatsApp',
-    href: 'https://wa.me/5491123456789',
+    href: 'https://wa.me/5492615278495?text=Hola,%20me%20interesa%20saber%20más%20información%20sobre%20sus%20servicios%20eléctricos.',
     icon: 'WhatsAppIcon',
     color: 'hover:text-green-500',
   },
@@ -81,7 +81,7 @@ export const socialLinks: ISocialLink[] = [
   {
     id: 'instagram',
     name: 'Instagram',
-    href: 'https://instagram.com/ose_electricidad',
+    href: 'https://www.instagram.com/oselectric_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==',
     icon: 'InstagramIcon',
     color: 'hover:text-pink-500',
   },

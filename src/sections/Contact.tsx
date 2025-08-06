@@ -395,7 +395,7 @@ const Contact = () => {
                   ¿Necesitas respuesta inmediata? Escríbenos por WhatsApp
                 </p>
                 <a
-                  href="https://wa.me/5492613897545?text=Hola,%20me%20interesa%20información%20sobre%20sus%20servicios%20eléctricos"
+                  href="https://wa.me/5492615278495?text=Hola,%20me%20interesa%20saber%20más%20información%20sobre%20sus%20servicios%20eléctricos."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium"
