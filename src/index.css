@@ -3,25 +3,28 @@
 /* Sora Regular */
 @font-face {
   font-family: 'Sora';
-  src: url('/assets/fonts/sora/Sora-Regular.woff2') format('truetype');
+  src: url('/assets/fonts/sora/Sora-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+    font-display: swap;
 }
 
 /* Sora SemiBold */
 @font-face {
   font-family: 'Sora';
-  src: url('/assets/fonts/sora/Sora-SemiBold.woff2') format('truetype');
+  src: url('/assets/fonts/sora/Sora-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
+    font-display: swap;
 }
 
 /* Sora ExtraBold */
 @font-face {
   font-family: 'Sora';
-  src: url('/assets/fonts/sora/Sora-ExtraBold.woff2') format('truetype');
+  src: url('/assets/fonts/sora/Sora-ExtraBold.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
+    font-display: swap;
 }
 
 @theme {
