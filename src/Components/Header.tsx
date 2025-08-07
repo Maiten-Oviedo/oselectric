@@ -153,13 +153,14 @@ const Header = () => {
 
                 {!logoError ? (
                   <img
-                    src="/assets/images/logo.jpeg"
-                    alt="Logo de OSE - Instalaciones Eléctricas, diseño profesional con tonos azules y rojos"
-                    className={`
-                      w-full h-full object-cover rounded-xl shadow-md
-                      transition-all duration-500 hover:scale-105
-                      ${logoLoaded ? 'opacity-100' : 'opacity-0'}
-                    `}
+                    src="/assets/images/logo@2x.webp"
+                    srcSet="
+                      /assets/images/logo@1x.webp 1x,
+                      /assets/images/logo@2x.webp 2x,
+                      /assets/images/logo@3x.webp 3x
+                    "
+                    alt="Logo de OSE..."
+                    className="w-full h-full object-cover rounded-xl shadow-md transition-all duration-500 hover:scale-105"
                     loading="eager"
                     onLoad={() => setLogoLoaded(true)}
                     onError={() => setLogoError(true)}
