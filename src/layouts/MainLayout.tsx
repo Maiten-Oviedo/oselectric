@@ -1,25 +1,32 @@
-import Header from '../Components/Header'
-import WhatsAppFloatingButton from '../Components/WhatsAppFlotingButton'
-import AboutUs from '../sections/AboutUs'
-import Contact from '../sections/Contact'
-import Footer from '../sections/Footer'
+import { lazy, Suspense } from 'react'
 import Hero from '../sections/Hero'
-import LatestsWorks from '../sections/LatestsWorks'
-import Services from '../sections/Services'
-import WhyChooseUs from '../sections/WhyChooseUs'
+
+const Header = lazy(() => import('../Components/Header'))
+const WhatsAppFloatingButton = lazy(
+  () => import('../Components/WhatsAppFlotingButton')
+)
+const AboutUs = lazy(() => import('../sections/AboutUs'))
+const Contact = lazy(() => import('../sections/Contact'))
+const Footer = lazy(() => import('../sections/Footer'))
+
+const LatestsWorks = lazy(() => import('../sections/LatestsWorks'))
+const Services = lazy(() => import('../sections/Services'))
+const WhyChooseUs = lazy(() => import('../sections/WhyChooseUs'))
 
 const MainLayout = () => {
   return (
     <main className="overflow-x-hidden">
       <Header />
       <Hero />
-      <Services />
-      <WhyChooseUs />
-      <LatestsWorks />
-      <AboutUs />
-      <Contact />
-      <Footer />
-      <WhatsAppFloatingButton />
+      <Suspense fallback={<div>Cargando...</div>}>
+        <Services />
+        <WhyChooseUs />
+        <LatestsWorks />
+        <AboutUs />
+        <Contact />
+        <Footer />
+        <WhatsAppFloatingButton />
+      </Suspense>
     </main>
   )
 }

@@ -1,43 +1,21 @@
 'use client'
 
 import type React from 'react'
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import type { IFooterLink } from '../types/footer'
 import { footerSections, socialLinks } from '../constants/footerData'
 import InstagramIcon from '../assets/icons/InstagramIcon'
 import WhatsAppIcon from '../assets/icons/WhatsAppIcon'
 import FacebookIcon from '../assets/icons/FacebookIcon'
+import { useInView } from 'react-intersection-observer'
 const Footer = () => {
   const [logoLoaded, setLogoLoaded] = useState(false)
   const [logoError, setLogoError] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
 
-  const footerRef = useRef<HTMLElement>(null)
-
-  // Intersection Observer para animaciones
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '100px',
-      }
-    )
-
-    if (footerRef.current) {
-      observer.observe(footerRef.current)
-    }
-
-    return () => {
-      if (footerRef.current) {
-        observer.unobserve(footerRef.current)
-      }
-    }
-  }, [])
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  })
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -73,7 +51,7 @@ const Footer = () => {
   return (
     <>
       <footer
-        ref={footerRef}
+        ref={ref}
         className="bg-gradient-to-b from-gray-50 to-gray-100 border-t-4 border-primary mt-20"
         aria-labelledby="footer-heading"
       >
@@ -85,7 +63,7 @@ const Footer = () => {
               className={`
                 text-center mb-16 transition-all duration-1000 ease-out
                 ${
-                  isVisible
+                  inView
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'
                 }
@@ -111,7 +89,7 @@ const Footer = () => {
                 className={`
                   lg:max-w-[300px] transition-all duration-1000 ease-out delay-200
                   ${
-                    isVisible
+                    inView
                       ? 'opacity-100 translate-y-0'
                       : 'opacity-0 translate-y-8'
                   }
@@ -213,7 +191,7 @@ const Footer = () => {
                   className={`
                      transition-all duration-1000 ease-out
                     ${
-                      isVisible
+                      inView
                         ? 'opacity-100 translate-y-0'
                         : 'opacity-0 translate-y-8'
                     }
@@ -274,7 +252,7 @@ const Footer = () => {
               className={`
                 grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 transition-all duration-1000 ease-out delay-1400
                 ${
-                  isVisible
+                  inView
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'
                 }
@@ -311,7 +289,7 @@ const Footer = () => {
                 <div className="text-center md:text-left">
                   <p className="text-sm text-gray-900">
                     © {currentYear}{' '}
-                    <span className="font-semibold text-primary">
+                    <span className="font-semibold text-primary-bold">
                       OSE Servicios Eléctricos
                     </span>
                     . Todos los derechos reservados.

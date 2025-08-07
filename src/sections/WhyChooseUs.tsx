@@ -1,5 +1,6 @@
 'use client'
 
+import { useInView } from 'react-intersection-observer'
 import WhyChooseUsCard from '../Components/WhyChooseUsCard'
 import type { IReason } from '../types/IReason'
 
@@ -61,10 +62,18 @@ const WhyChooseUs = () => {
     },
   ]
 
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  })
+
   return (
     <>
       <section
-        className="px-4 sm:px-6 md:px-16 lg:px-32 py-20 bg-gradient-to-b from-white to-gray-50"
+        ref={ref}
+        className={`px-4 sm:px-6 md:px-16 lg:px-32 py-20 bg-gradient-to-b from-white to-gray-50 transition duration-300 ${
+          inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
         aria-labelledby="why-choose-us-heading"
       >
         {/* Header de la sección */}

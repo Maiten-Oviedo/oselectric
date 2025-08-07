@@ -1,11 +1,16 @@
 'use client'
 
 import type React from 'react'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import emailjs from '@emailjs/browser'
 import type { IContactForm } from '../types/IContact'
+import { useInView } from 'react-intersection-observer'
 
 const Contact = () => {
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  })
   const [formData, setFormData] = useState<IContactForm>({
     name: '',
     email: '',
@@ -21,34 +26,7 @@ const Contact = () => {
     message: string
   }>({ type: null, message: '' })
 
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
-
-  // Intersection Observer para animaciones
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '50px',
-      }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
-      }
-    }
-  }, [])
 
   const services = [
     'Sistemas Fotovoltaicos',
@@ -203,7 +181,7 @@ const Contact = () => {
   return (
     <>
       <section
-        ref={sectionRef}
+        ref={ref}
         id="contacto"
         className="px-4 sm:px-6 md:px-16 lg:px-32 py-20 bg-gradient-to-b from-white to-gray-50"
         aria-labelledby="contact-heading"
@@ -215,11 +193,7 @@ const Contact = () => {
             className={`
             text-4xl sm:text-5xl lg:text-6xl mb-6 font-semibold text-gray-900
             transition-all duration-1000 ease-out
-            ${
-              isVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8'
-            }
+            ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
           `}
           >
             <span className="text-primary-bold">Contáctanos</span>
@@ -228,11 +202,7 @@ const Contact = () => {
             className={`
             text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-4
             transition-all duration-1000 ease-out delay-200
-            ${
-              isVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8'
-            }
+            ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
           `}
           >
             ¿Tienes preguntas o necesitas un presupuesto? Estamos aquí para
@@ -242,11 +212,7 @@ const Contact = () => {
             className={`
             text-2xl sm:text-3xl font-bold text-primary uppercase tracking-wide
             transition-all duration-1000 ease-out delay-400
-            ${
-              isVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8'
-            }
+            ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
           `}
           >
             Respuesta garantizada en 24 horas
@@ -260,7 +226,7 @@ const Contact = () => {
               className={`
               space-y-8 transition-all duration-1000 ease-out delay-600
               ${
-                isVisible
+                inView
                   ? 'opacity-100 translate-x-0'
                   : 'opacity-0 -translate-x-8'
               }
@@ -420,7 +386,7 @@ const Contact = () => {
                 bg-white rounded-2xl shadow-xl p-8 space-y-6
                 transition-all duration-1000 ease-out delay-800
                 ${
-                  isVisible
+                  inView
                     ? 'opacity-100 translate-x-0'
                     : 'opacity-0 translate-x-8'
                 }

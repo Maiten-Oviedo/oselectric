@@ -1,3 +1,4 @@
+import { useInView } from 'react-intersection-observer'
 import LatestWorkCard from '../Components/LatestWorkCard'
 
 const LatestWorks = () => {
@@ -27,11 +28,17 @@ const LatestWorks = () => {
       alt: 'Instalación de paneles arquitectónicos',
     },
   ]
-
+  const { ref, inView } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  })
   return (
     <section
+      ref={ref}
       id="trabajos"
-      className="mt-24 flex justify-center px-4 md:px-24"
+      className={`mt-24 flex justify-center px-4 md:px-24 transition duration-300 ${
+        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
       aria-labelledby="latest-works-heading"
     >
       {/* Heading oculto para SEO y accesibilidad */}

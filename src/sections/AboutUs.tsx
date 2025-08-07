@@ -1,40 +1,20 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import TeamMemberCard from '../Components/TeamMemberCard'
 import MissionVision from '../Components/MissionVision'
 import { companyValues, teamMembers } from '../constants/aboutData'
+import { useInView } from 'react-intersection-observer'
 const AboutUs = () => {
   const [activeTab, setActiveTab] = useState<'historia' | 'equipo' | 'valores'>(
     'historia'
   )
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLElement>(null)
 
-  // Intersection Observer para animaciones
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '50px',
-      }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current)
-      }
-    }
-  }, [])
+  const { ref: sectionRef, inView: isVisible } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+    rootMargin: '50px',
+  })
 
   const tabs = [
     { id: 'historia', label: 'Nuestra Historia', icon: '📖' },

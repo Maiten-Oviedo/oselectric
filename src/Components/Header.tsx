@@ -312,7 +312,7 @@ const Header = () => {
                     transition-all duration-200 ease-out hover:bg-gray-50
                     ${
                       isLinkActive(link)
-                        ? 'text-primary bg-primary/5 border-r-2 border-primary'
+                        ? 'text-primary-bold border-r-2 border-primary'
                         : 'text-black'
                     }
                   `}
