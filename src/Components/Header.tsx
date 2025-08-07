@@ -215,7 +215,7 @@ const Header = () => {
             {/* CTA Button (Desktop) */}
             <div className="hidden md:block">
               <a
-                href="mailto:info@ose.com"
+                href="tel:+5492615533891"
                 className="
                   inline-flex items-center px-6 py-2.5 bg-primary-bold hover:bg-primary/90 
                   text-white font-normal text-sm rounded-lg shadow-md hover:shadow-lg
@@ -236,7 +236,7 @@ const Header = () => {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                Cotizar
+                +54 9 2615533891
               </a>
             </div>
 
@@ -313,7 +313,7 @@ const Header = () => {
                     ${
                       isLinkActive(link)
                         ? 'text-primary bg-primary/5 border-r-2 border-primary'
-                        : 'text-gray-700'
+                        : 'text-black'
                     }
                   `}
                   style={{ animationDelay: `${index * 50}ms` }}
@@ -347,7 +347,7 @@ const Header = () => {
                 href="https://wa.me/5492615278495?text=Hola,%20me%20interesa%20saber%20más%20información%20sobre%20sus%20servicios%20eléctricos."
                 rel="noopener noreferrer"
                 className="
-                  w-full flex gap-2 items-center justify-center px-4 py-3 bg-primary hover:bg-primary/90 
+                  w-full flex gap-2 items-center justify-center px-4 py-3 bg-primary-bold hover:bg-primary/90 
                   text-white font-medium rounded-lg shadow-md transition-all duration-200
                 "
               >
@@ -358,7 +358,7 @@ const Header = () => {
               </a>
 
               {/* Información de contacto rápida */}
-              <div className="text-center text-sm text-gray-600">
+              <div className="text-center text-sm text-black/90">
                 <p>
                   📞{' '}
                   <a
@@ -372,11 +372,11 @@ const Header = () => {
                 <p>
                   📧{' '}
                   <a
-                    href="mailto:info@ose.com"
+                    href="mailto:obraservicioselectricos@gmail.com"
                     className="hover:underline"
-                    aria-label="Enviar correo a info@ose.com"
+                    aria-label="Enviar correo a obraservicioselectricos@gmail.com"
                   >
-                    info@ose.com
+                    obraservicioselectricos@gmail.com
                   </a>
                 </p>
               </div>

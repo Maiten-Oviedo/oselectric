@@ -65,7 +65,7 @@ const Services = () => {
             id="services-heading"
             className="text-4xl sm:text-5xl lg:text-6xl mb-6 font-semibold text-gray-900"
           >
-            Nuestros <span className="text-primary">Servicios</span>
+            Nuestros <span className="text-primary-bold">Servicios</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Ofrecemos soluciones eléctricas integrales con más de 10 años de

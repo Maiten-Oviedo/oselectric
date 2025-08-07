@@ -100,7 +100,6 @@ const WhyChooseUsCard = ({ reason, index }: Props) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       tabIndex={0}
-      role="article"
       aria-labelledby={`reason-title-${reason.id}`}
     >
       {/* Icono con gradiente */}

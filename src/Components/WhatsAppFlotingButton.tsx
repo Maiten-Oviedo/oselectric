@@ -59,7 +59,7 @@ const WhatsAppFloatingButton = () => {
           </p>
           <button
             onClick={handleWhatsAppClick}
-            className="w-full flex items-center justify-center px-4 py-3 bg-green-500 text-white rounded-lg font-medium text-base shadow-md hover:bg-green-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            className="w-full flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg font-medium text-base shadow-md hover:bg-green-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 cursor-pointer"
           >
             <svg
               className="size-6 mr-2"

@@ -150,7 +150,7 @@ const Contact = () => {
               : '48 horas',
           company_name: 'Instalaciones Eléctricas Profesionales',
           company_phone: '+54 9 261 533-3891',
-          company_email: 'info@tuempresa.com',
+          company_email: 'obraservicioselectricos@gmail.com',
         }
 
         // Enviar confirmación (opcional - necesitas crear un segundo template)
@@ -222,7 +222,7 @@ const Contact = () => {
             }
           `}
           >
-            <span className="text-primary">Contáctanos</span>
+            <span className="text-primary-bold">Contáctanos</span>
           </h2>
           <p
             className={`
@@ -318,10 +318,10 @@ const Contact = () => {
                     <div>
                       <p className="font-semibold text-gray-900">Email</p>
                       <a
-                        href="mailto:info@tuempresa.com"
+                        href="mailto:obraservicioselectricos@gmail.com"
                         className="text-gray-600 hover:text-primary transition-colors"
                       >
-                        info@tuempresa.com
+                        obraservicioselectricos@gmail.com
                       </a>
                     </div>
                   </div>
@@ -625,7 +625,7 @@ const Contact = () => {
               '@type': 'LocalBusiness',
               name: 'Instalaciones Eléctricas Profesionales',
               telephone: '+54-11-1234-5678',
-              email: 'info@tuempresa.com',
+              email: 'obraservicioselectricos@gmail.com',
               address: {
                 '@type': 'PostalAddress',
                 addressLocality: 'Buenos Aires',

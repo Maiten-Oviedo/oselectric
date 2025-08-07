@@ -96,7 +96,7 @@ const Footer = () => {
               </h2>
               <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
                 ¿Listo para tu próximo{' '}
-                <span className="text-primary">proyecto eléctrico</span>?
+                <span className="text-primary-bold">proyecto eléctrico</span>?
               </h3>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                 Contáctanos hoy y descubre por qué somos la opción preferida
@@ -126,14 +126,15 @@ const Footer = () => {
 
                     {!logoError ? (
                       <img
-                        src="/assets/images/logo.jpeg"
-                        alt="Logo de OSE - Instalaciones Eléctricas, diseño profesional con tonos azules y rojos"
-                        className={`
-                          w-full h-full object-cover rounded-2xl shadow-lg
-                          transition-opacity duration-500
-                          ${logoLoaded ? 'opacity-100' : 'opacity-0'}
-                        `}
-                        loading="lazy"
+                        src="/assets/images/logo@2x.webp"
+                        srcSet="
+                      /assets/images/logo@1x.webp 1x,
+                      /assets/images/logo@2x.webp 2x,
+                      /assets/images/logo@3x.webp 3x
+                    "
+                        alt="Logo de OSE..."
+                        className="w-full h-full object-cover rounded-xl shadow-md transition-all duration-500 hover:scale-105"
+                        loading="eager"
                         onLoad={() => setLogoLoaded(true)}
                         onError={() => setLogoError(true)}
                       />
@@ -308,14 +309,14 @@ const Footer = () => {
               <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 {/* Copyright */}
                 <div className="text-center md:text-left">
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-900">
                     © {currentYear}{' '}
                     <span className="font-semibold text-primary">
                       OSE Servicios Eléctricos
                     </span>
                     . Todos los derechos reservados.
                   </p>
-                  <p className="text-xs text-gray-700 mt-1">
+                  <p className="text-xs text-gray-900 mt-1">
                     Desarrollado con ❤️ para brindar el mejor servicio
                     eléctrico. By{' '}
                     <a

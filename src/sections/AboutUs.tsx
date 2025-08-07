@@ -64,7 +64,7 @@ const AboutUs = () => {
             }
           `}
           >
-            Sobre <span className="text-primary">Nosotros</span>
+            Sobre <span className="text-primary-bold">Nosotros</span>
           </h2>
           <p
             className={`
@@ -98,7 +98,7 @@ const AboutUs = () => {
                   transition-all duration-300 ease-out
                   ${
                     activeTab === tab.id
-                      ? 'bg-primary text-white shadow-lg transform scale-105'
+                      ? 'bg-primary-bold text-white shadow-lg transform scale-105'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-white'
                   }
                 `}
@@ -151,7 +151,7 @@ const AboutUs = () => {
                       { year: '2024', event: '500+ proyectos completados' },
                     ].map((milestone, index) => (
                       <div key={index} className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm">
+                        <div className="w-12 h-12 bg-primary-bold text-white rounded-full flex items-center justify-center font-bold text-sm">
                           {milestone.year.slice(-2)}
                         </div>
                         <span className="text-gray-700">{milestone.event}</span>

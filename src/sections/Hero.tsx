@@ -43,7 +43,7 @@ const Hero = () => {
               className="text-gray-900 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight md:leading-none mb-6 md:mb-0"
             >
               Instalaciones y construcciones{' '}
-              <span className="text-primary">eléctricas</span>
+              <span className="text-primary-bold">eléctricas</span>
             </h1>
           </header>
 

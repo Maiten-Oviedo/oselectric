@@ -73,7 +73,7 @@ const WhyChooseUs = () => {
             id="why-choose-us-heading"
             className="text-4xl sm:text-5xl lg:text-6xl mb-6 font-semibold text-gray-900"
           >
-            ¿Por qué <span className="text-primary">elegirnos</span>?
+            ¿Por qué <span className="text-primary-bold">elegirnos</span>?
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Más de 20 años de experiencia nos respaldan. Descubre las razones
@@ -82,7 +82,10 @@ const WhyChooseUs = () => {
         </header>
 
         {/* Grid de razones */}
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <ul
+          role="list"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
+        >
           {reasons.map((reason, index) => (
             <WhyChooseUsCard key={reason.id} reason={reason} index={index} />
           ))}
