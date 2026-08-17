@@ -1,5 +1,8 @@
 # OSElectric SAS — Landing corporativa
 
+<img width="1896" height="962" alt="image" src="https://github.com/user-attachments/assets/c4d7c1b0-727d-4b55-a89b-78eb5891215e" />
+
+
 Landing corporativa para [OSElectric SAS](https://oselectricsas.com.ar), empresa de instalaciones eléctricas y paneles solares en Mendoza, Argentina.
 
 **🌐 En producción:** [oselectricsas.com.ar](https://oselectricsas.com.ar)
