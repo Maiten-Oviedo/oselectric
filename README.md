@@ -1,69 +1,47 @@
-# React + TypeScript + Vite
+# OSElectric SAS — Landing corporativa
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Landing corporativa para [OSElectric SAS](https://oselectricsas.com.ar), empresa de instalaciones eléctricas y paneles solares en Mendoza, Argentina.
 
-Currently, two official plugins are available:
+**🌐 En producción:** [oselectricsas.com.ar](https://oselectricsas.com.ar)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Highlights
 
-## Expanding the ESLint configuration
+- ✅ **100/100 en Google Lighthouse** — Performance, Accesibilidad, Buenas Prácticas y SEO.
+- ✅ **SEO on-page completo** — sitemap.xml, robots.txt, Open Graph, integración con Google Search Console.
+- ✅ **Responsive design** — mobile-first, funciona bien en cualquier dispositivo.
+- ✅ **Formulario de contacto** integrado con EmailJS.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Stack
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Framework:** React 18 + Vite
+- **Lenguaje:** TypeScript
+- **Estilos:** TailwindCSS v4
+- **Formularios:** EmailJS
+- **Deploy:** Vercel
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Estructura
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/    # Componentes reutilizables (Hero, Servicios, Trabajos, Contacto, Footer)
+├── pages/         # Páginas del sitio
+├── assets/        # Imágenes optimizadas
+└── styles/        # Configuración Tailwind
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Correr localmente
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/Maiten-Oviedo/oselectric-landing.git
+cd oselectric-landing
+npm install
+npm run dev
 ```
+
+El sitio queda disponible en `http://localhost:5173`.
+
+## Sobre el desarrollo
+
+Desarrollé este sitio de forma freelance para OSElectric SAS en agosto 2025. Cliente satisfecho, sitio publicado y funcionando. Prioridad de diseño: claridad, velocidad y posicionamiento en buscadores.
+
+Contacto: [maitenoviedo513@gmail.com](mailto:maitenoviedo513@gmail.com) · [LinkedIn](https://linkedin.com/in/maiten-oviedo)
